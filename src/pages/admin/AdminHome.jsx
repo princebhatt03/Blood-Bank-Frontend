@@ -10,10 +10,13 @@ const AdminHome = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:3000/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
+      const response = await fetch(
+        'https://blood-bank-backend-n110.onrender.com/logout',
+        {
+          method: 'POST',
+          credentials: 'include',
+        }
+      );
 
       if (response.ok) {
         navigate('/adminLogin');
@@ -28,7 +31,9 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/getAllUsers');
+        const response = await fetch(
+          'https://blood-bank-backend-n110.onrender.com/getAllUsers'
+        );
         const data = await response.json();
         setUsers(Array.isArray(data) ? data : []);
       } catch (error) {
@@ -38,7 +43,9 @@ const AdminHome = () => {
 
     const fetchPatients = async () => {
       try {
-        const response = await fetch('http://localhost:3000/getAllPatients');
+        const response = await fetch(
+          'https://blood-bank-backend-n110.onrender.com/getAllPatients'
+        );
         const data = await response.json();
         setPatients(Array.isArray(data) ? data : []);
       } catch (error) {
@@ -48,13 +55,16 @@ const AdminHome = () => {
 
     const fetchAdmin = async () => {
       try {
-        const response = await fetch('http://localhost:3000/getAdminDetails', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        const response = await fetch(
+          'https://blood-bank-backend-n110.onrender.com/getAdminDetails',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
         if (response.status === 401) {
           console.error('Unauthorized access - Admin not logged in.');
@@ -75,9 +85,12 @@ const AdminHome = () => {
 
   const handleDeleteUser = async id => {
     try {
-      await fetch(`http://localhost:3000/deleteUser/${id}`, {
-        method: 'DELETE',
-      });
+      await fetch(
+        `https://blood-bank-backend-n110.onrender.com/deleteUser/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
       setUsers(users.filter(user => user._id !== id));
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -86,9 +99,12 @@ const AdminHome = () => {
 
   const handleDeletePatient = async id => {
     try {
-      await fetch(`http://localhost:3000/deletePatient/${id}`, {
-        method: 'DELETE',
-      });
+      await fetch(
+        `https://blood-bank-backend-n110.onrender.com/deletePatient/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
       setPatients(patients.filter(patient => patient._id !== id));
     } catch (error) {
       console.error('Error deleting patient:', error);

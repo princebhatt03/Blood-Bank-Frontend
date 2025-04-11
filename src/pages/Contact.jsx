@@ -20,11 +20,14 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/registerPatient', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(patient),
-      });
+      const response = await fetch(
+        'https://blood-bank-backend-n110.onrender.com/registerPatient',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(patient),
+        }
+      );
 
       const data = await response.json();
 

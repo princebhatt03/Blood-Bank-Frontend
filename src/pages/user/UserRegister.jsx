@@ -29,7 +29,7 @@ const UserRegister = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/userRegister',
+        'https://blood-bank-backend-n110.onrender.com/userRegister',
         formData
       );
       setMessage(response.data.message);

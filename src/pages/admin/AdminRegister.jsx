@@ -28,7 +28,7 @@ const AdminRegister = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/adminRegister',
+        'https://blood-bank-backend-n110.onrender.com/adminRegister',
         formData
       );
 
