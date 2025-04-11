@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const Contact = () => {
+  const navigate = useNavigate();
   const [patient, setPatient] = useState({
     fullName: '',
     aadhaar: '',
@@ -128,7 +129,7 @@ const Contact = () => {
         </button>
         <button
           type="submit"
-          onClick={() => (window.location.href = '/adminHome')}
+          onClick={() => navigate('/adminHome')}
           className="w-full mt-1 bg-green-600 text-white p-2 rounded">
           Back to Home
         </button>
