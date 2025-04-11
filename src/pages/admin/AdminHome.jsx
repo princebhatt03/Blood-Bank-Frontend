@@ -5,7 +5,7 @@ const AdminHome = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [patients, setPatients] = useState([]);
-  const [adminName, setAdminName] = useState('Admin');
+  const [adminName, setAdminName] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -64,27 +64,29 @@ const AdminHome = () => {
 
     const fetchAdmin = async () => {
       try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_BACKEND_URL ||
-            import.meta.env.VITE_LOCAL_BACKEND_URL
-          }/getAdminDetails`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const backendURL =
+          import.meta.env.VITE_BACKEND_URL ||
+          import.meta.env.VITE_LOCAL_BACKEND_URL;
 
-        if (response.status === 401) {
-          console.error('Unauthorized access - Admin not logged in.');
+        const response = await fetch(`${backendURL}/getAdminDetails`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include', 
+        });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            console.error('Unauthorized access - Admin not logged in.');
+          } else {
+            console.error(`Error: ${response.status} - ${response.statusText}`);
+          }
           return;
         }
 
         const data = await response.json();
-        setAdminName(data.name || 'Admin');
+        setAdminName(data.adminName);
       } catch (error) {
         console.error('Error fetching admin details:', error);
       }
@@ -148,7 +150,9 @@ const AdminHome = () => {
 
           {/* Desktop View: Admin Name & Logout Button */}
           <div className="hidden md:flex items-center gap-4">
-            <p className="text-white text-lg">Welcome, {adminName}</p>
+            <p className="text-white text-lg">
+              Welcome, {adminName || 'Admin'}
+            </p>
             <button
               onClick={handleLogout}
               className="bg-red-500 px-4 py-2 rounded text-white hover:bg-red-600 transition">
