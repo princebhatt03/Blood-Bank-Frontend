@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom';
 
 const PatientDetails = () => {
   const { id } = useParams();
-
-  // Mock data for now (Replace with API call later)
   const patient = {
     fullName: 'Rahul Sharma',
     aadhaar: '1234-5678-9012',

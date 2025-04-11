@@ -11,7 +11,10 @@ const AdminHome = () => {
   const handleLogout = async () => {
     try {
       const response = await fetch(
-        'https://blood-bank-backend-n110.onrender.com/logout',
+        `${
+          import.meta.env.VITE_BACKEND_URL ||
+          import.meta.env.VITE_LOCAL_BACKEND_URL
+        }/logout`,
         {
           method: 'POST',
           credentials: 'include',
@@ -32,7 +35,10 @@ const AdminHome = () => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          'https://blood-bank-backend-n110.onrender.com/getAllUsers'
+          `${
+            import.meta.env.VITE_BACKEND_URL ||
+            import.meta.env.VITE_LOCAL_BACKEND_URL
+          }/getAllUsers`
         );
         const data = await response.json();
         setUsers(Array.isArray(data) ? data : []);
@@ -44,7 +50,10 @@ const AdminHome = () => {
     const fetchPatients = async () => {
       try {
         const response = await fetch(
-          'https://blood-bank-backend-n110.onrender.com/getAllPatients'
+          `${
+            import.meta.env.VITE_BACKEND_URL ||
+            import.meta.env.VITE_LOCAL_BACKEND_URL
+          }/getAllPatients`
         );
         const data = await response.json();
         setPatients(Array.isArray(data) ? data : []);
@@ -56,7 +65,10 @@ const AdminHome = () => {
     const fetchAdmin = async () => {
       try {
         const response = await fetch(
-          'https://blood-bank-backend-n110.onrender.com/getAdminDetails',
+          `${
+            import.meta.env.VITE_BACKEND_URL ||
+            import.meta.env.VITE_LOCAL_BACKEND_URL
+          }/getAdminDetails`,
           {
             method: 'GET',
             headers: {
@@ -86,11 +98,15 @@ const AdminHome = () => {
   const handleDeleteUser = async id => {
     try {
       await fetch(
-        `https://blood-bank-backend-n110.onrender.com/deleteUser/${id}`,
+        `${
+          import.meta.env.VITE_BACKEND_URL ||
+          import.meta.env.VITE_LOCAL_BACKEND_URL
+        }/deleteUser/${id}`,
         {
           method: 'DELETE',
         }
       );
+
       setUsers(users.filter(user => user._id !== id));
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -100,11 +116,15 @@ const AdminHome = () => {
   const handleDeletePatient = async id => {
     try {
       await fetch(
-        `https://blood-bank-backend-n110.onrender.com/deletePatient/${id}`,
+        `${
+          import.meta.env.VITE_BACKEND_URL ||
+          import.meta.env.VITE_LOCAL_BACKEND_URL
+        }/deletePatient/${id}`,
         {
           method: 'DELETE',
         }
       );
+
       setPatients(patients.filter(patient => patient._id !== id));
     } catch (error) {
       console.error('Error deleting patient:', error);

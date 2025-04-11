@@ -29,9 +29,13 @@ const UserRegister = () => {
 
     try {
       const response = await axios.post(
-        'https://blood-bank-backend-n110.onrender.com/userRegister',
+        `${
+          import.meta.env.VITE_BACKEND_URL ||
+          import.meta.env.VITE_LOCAL_BACKEND_URL
+        }/userRegister`,
         formData
       );
+
       setMessage(response.data.message);
       setFormData({
         fullName: '',

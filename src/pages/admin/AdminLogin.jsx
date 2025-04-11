@@ -24,7 +24,10 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch(
-        'https://blood-bank-backend-n110.onrender.com/adminLogin',
+        `${
+          import.meta.env.VITE_BACKEND_URL ||
+          import.meta.env.VITE_LOCAL_BACKEND_URL
+        }/adminLogin`,
         {
           method: 'POST',
           headers: {
