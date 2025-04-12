@@ -38,7 +38,7 @@ const Contact = () => {
 
       if (response.ok) {
         setSuccessMessage('Patient Registered Successfully!');
-        setErrorMessage(''); // Clear error message
+        setErrorMessage(''); 
         setPatient({
           fullName: '',
           aadhaar: '',
@@ -48,15 +48,13 @@ const Contact = () => {
         });
       } else {
         setErrorMessage(data.message || 'Error registering patient.');
-        setSuccessMessage(''); // Clear success message
+        setSuccessMessage('');
       }
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('Server Error! Please try again.');
       setSuccessMessage('');
     }
-
-    // Remove flash messages after 3 seconds
     setTimeout(() => {
       setSuccessMessage('');
       setErrorMessage('');
